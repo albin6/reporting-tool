@@ -4,6 +4,7 @@ import rateLimit from "express-rate-limit";
 import { logger } from "./config/logger";
 import { appConfig } from "./config/app";
 import { corsConfig } from "./config/cors";
+import { Database } from "./config/database";
 
 class Server {
   private app: Application;
@@ -12,6 +13,7 @@ class Server {
   constructor(port: number) {
     this.app = express();
     this.port = port;
+    Database.init()
     this.initializeMiddlewares();
     this.initializeRoutes();
   }

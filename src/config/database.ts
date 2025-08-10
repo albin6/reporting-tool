@@ -30,12 +30,3 @@ export class Database {
     return Database.pool;
   }
 }
-
-// Usage:
-// Call Database.init() once at the start of your application,
-// typically in your main entry file (e.g., index.ts or app.ts).
-// Then use Database.getPool() wherever you need to access the pool.
-
-// Example (in your main file):
-// import { Database } from "./config/database";
-// Database.init();
