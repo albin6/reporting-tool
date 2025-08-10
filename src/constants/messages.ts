@@ -5,6 +5,7 @@ export const ERROR_MESSAGES = {
     BAD_REQUEST: 'Invalid request data.',
     INTERNAL_ERROR: 'Internal server error.',
     VALIDATION_FAILED: 'Validation failed.',
+    TOKEN_MISSING: 'Authorization token is missing.',
 };
 
 export const SUCCESS_MESSAGES = {
