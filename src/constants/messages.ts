@@ -3,7 +3,7 @@ export const ERROR_MESSAGES = {
     UNAUTHORIZED: 'Unauthorized access.',
     FORBIDDEN: 'Forbidden action.',
     BAD_REQUEST: 'Invalid request data.',
-    INTERNAL_ERROR: 'Internal server error.',
+    INTERNAL_SERVER_ERROR: 'Internal server error.',
     VALIDATION_FAILED: 'Validation failed.',
     TOKEN_MISSING: 'Authorization token is missing.',
 };
