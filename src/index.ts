@@ -31,7 +31,7 @@ class Server {
   private initializeRoutes() {
     this.app.get("/", async (req: Request, res: Response) => {
       const users = await prisma.user.findMany();
-      res.json(users);
+      res.json({ success: true, data: users });
     });
   }
 
