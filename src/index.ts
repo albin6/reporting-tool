@@ -4,7 +4,7 @@ import rateLimit from "express-rate-limit";
 import { logger } from "./config/logger";
 import { appConfig } from "./config/app";
 import { corsConfig } from "./config/cors";
-import { Database } from "./config/database";
+import prisma from "./config/database";
 
 class Server {
   private app: Application;
@@ -13,9 +13,9 @@ class Server {
   constructor(port: number) {
     this.app = express();
     this.port = port;
-    Database.init()
     this.initializeMiddlewares();
     this.initializeRoutes();
+    this.handleShutdown();
   }
 
   private initializeMiddlewares() {
@@ -29,8 +29,23 @@ class Server {
   }
 
   private initializeRoutes() {
-    this.app.get("/", (req: Request, res: Response) => {
-      res.send("Hello World!");
+    this.app.get("/", async (req: Request, res: Response) => {
+      const users = await prisma.user.findMany();
+      res.json(users);
+    });
+  }
+
+  private handleShutdown() {
+    process.on("SIGINT", async () => {
+      logger.info("Shutting down server...");
+      await prisma.$disconnect();
+      process.exit(0);
+    });
+
+    process.on("SIGTERM", async () => {
+      logger.info("Shutting down server...");
+      await prisma.$disconnect();
+      process.exit(0);
     });
   }
 
